@@ -13,6 +13,7 @@ import {
   selectCommentsStatus,
   selectCommentsError,
 } from '../app/slices/commentsSlice'
+import { Spinner, ErrorMessage, Image, Heading } from '../shared/ui'
 
 function ProductDetailPage() {
   const { id } = useParams()
@@ -38,21 +39,23 @@ function ProductDetailPage() {
   }, [dispatch, id])
 
   if (productsStatus === 'loading' && !product) {
-    return (
-      <p className="text-gray-600" role="status" aria-live="polite">
-        Ürün detayı yükleniyor…
-      </p>
-    )
+    return <Spinner label="Ürün detayı yükleniyor" />
   }
 
   if (productsStatus === 'failed' && !product) {
     return (
-      <div role="alert">
-        <p className="text-red-600">{productsError}</p>
-        <Link to="/" className="mt-2 inline-block text-gray-600 underline">
+      <>
+        <ErrorMessage
+          message={productsError}
+          onRetry={() => {
+            dispatch(fetchProductById(Number(id)))
+            dispatch(fetchCommentsByPostId(Number(id)))
+          }}
+        />
+        <Link to="/" className="mt-4 inline-block text-gray-600 underline">
           Listeye dön
         </Link>
-      </div>
+      </>
     )
   }
 
@@ -77,38 +80,39 @@ function ProductDetailPage() {
       </Link>
 
       <header>
-        <h2 className="text-2xl font-semibold text-gray-900">{product.name}</h2>
+        <Heading level={2} className="text-2xl font-semibold text-gray-900">
+          {product.name}
+        </Heading>
         <p className="mt-1 text-lg text-gray-700">
           {product.price.toFixed(2)} TL
         </p>
       </header>
 
       {product.imageUrl && (
-        <img
+        <Image
           src={product.imageUrl}
           alt={product.name}
           className="rounded-lg border border-gray-200 object-cover"
           width={400}
           height={300}
-          loading="lazy"
         />
       )}
 
       <p className="text-gray-600">{product.description}</p>
 
       <section aria-labelledby="comments-heading">
-        <h3 id="comments-heading" className="text-lg font-medium text-gray-900">
+        <Heading
+          level={3}
+          id="comments-heading"
+          className="text-lg font-medium text-gray-900"
+        >
           Yorumlar
-        </h3>
+        </Heading>
         {commentsStatus === 'loading' && (
-          <p className="mt-2 text-gray-500" role="status" aria-live="polite">
-            Yorumlar yükleniyor…
-          </p>
+          <Spinner label="Yorumlar yükleniyor" className="py-4" />
         )}
         {commentsStatus === 'failed' && (
-          <p className="mt-2 text-red-600" role="alert">
-            {commentsError}
-          </p>
+          <ErrorMessage message={commentsError} className="mt-2" />
         )}
         {commentsStatus === 'succeeded' && (
           <ul className="mt-2 space-y-3">

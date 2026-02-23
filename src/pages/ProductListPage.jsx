@@ -7,6 +7,7 @@ import {
   selectProductsStatus,
   selectProductsError,
 } from '../app/slices/productsSlice'
+import { Spinner, ErrorMessage, Heading } from '../shared/ui'
 
 function ProductListPage() {
   const dispatch = useDispatch()
@@ -19,26 +20,23 @@ function ProductListPage() {
   }, [dispatch])
 
   if (status === 'loading') {
-    return (
-      <p className="text-gray-600" role="status" aria-live="polite">
-        Ürünler yükleniyor…
-      </p>
-    )
+    return <Spinner label="Ürünler yükleniyor" />
   }
 
   if (status === 'failed') {
     return (
-      <div role="alert">
-        <p className="text-red-600">{error}</p>
-      </div>
+      <ErrorMessage
+        message={error}
+        onRetry={() => dispatch(fetchProducts())}
+      />
     )
   }
 
   return (
     <section aria-labelledby="product-list-heading">
-      <h2 id="product-list-heading" className="sr-only">
+      <Heading level={2} id="product-list-heading" srOnly>
         Ürün listesi
-      </h2>
+      </Heading>
       <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {products.map((product) => (
           <li key={product.id}>
