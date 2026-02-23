@@ -1,5 +1,4 @@
 import { useEffect } from 'react'
-import { Link } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetchProducts } from '../app/slices/productsSlice'
 import {
@@ -8,6 +7,7 @@ import {
   selectProductsError,
 } from '../app/slices/productsSlice'
 import { Spinner, ErrorMessage, Heading } from '../shared/ui'
+import { ProductList } from '../features/products'
 
 function ProductListPage() {
   const dispatch = useDispatch()
@@ -37,24 +37,7 @@ function ProductListPage() {
       <Heading level={2} id="product-list-heading" srOnly>
         Ürün listesi
       </Heading>
-      <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {products.map((product) => (
-          <li key={product.id}>
-            <Link
-              to={`/product/${product.id}`}
-              className="block rounded-lg border border-gray-200 bg-white p-4 shadow-sm transition hover:border-gray-300 hover:shadow focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
-            >
-              <span className="font-medium text-gray-900">{product.name}</span>
-              <span className="mt-2 block text-sm text-gray-600">
-                {product.price.toFixed(2)} TL
-              </span>
-              <span className="mt-1 block line-clamp-2 text-sm text-gray-500">
-                {product.description}
-              </span>
-            </Link>
-          </li>
-        ))}
-      </ul>
+      <ProductList products={products} />
     </section>
   )
 }
