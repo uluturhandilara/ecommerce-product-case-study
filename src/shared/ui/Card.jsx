@@ -8,9 +8,9 @@ function Card({
   ...rest
 }) {
   const base =
-    'rounded-lg border border-gray-200 bg-white shadow-sm transition'
+    'rounded-xl border border-gray-200 bg-white shadow-md transition'
   const interactive = isInteractive
-    ? 'hover:border-gray-300 hover:shadow focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500'
+    ? 'hover:border-gray-300 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500'
     : ''
   return createElement(
     as,

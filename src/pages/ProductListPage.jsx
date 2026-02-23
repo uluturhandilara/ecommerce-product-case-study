@@ -34,8 +34,12 @@ function ProductListPage() {
 
   return (
     <section aria-labelledby="product-list-heading">
-      <Heading level={2} id="product-list-heading" srOnly>
-        Ürün listesi
+      <Heading
+        level={2}
+        id="product-list-heading"
+        className="mb-6 text-2xl font-bold text-gray-900"
+      >
+        Tüm Ürünler
       </Heading>
       <ProductList products={products} />
     </section>
