@@ -1,0 +1,4 @@
+/**
+ * Route sayfaları.
+ * ProductListPage, ProductDetailPage
+ */
