@@ -34,13 +34,26 @@ function ProductListPage() {
 
   return (
     <section aria-labelledby="product-list-heading">
-      <Heading
-        level={2}
-        id="product-list-heading"
-        className="mb-6 text-2xl font-bold text-gray-900"
-      >
-        Tüm Ürünler
-      </Heading>
+      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <Heading
+          level={2}
+          id="product-list-heading"
+          className="text-2xl font-bold tracking-tight text-neutral-900 sm:text-3xl"
+        >
+          Tüm Ürünler
+        </Heading>
+        <div className="flex gap-2">
+          <span className="rounded-full bg-neutral-900 px-4 py-2 text-sm font-medium text-white">
+            Tümü
+          </span>
+          <span className="rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-700">
+            Yeni
+          </span>
+          <span className="rounded-full border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-700">
+            Popüler
+          </span>
+        </div>
+      </div>
       <ProductList products={products} />
     </section>
   )

@@ -8,7 +8,7 @@ function CommentList({ comments, status, error }) {
       <Heading
         level={3}
         id="comments-heading"
-        className="text-lg font-medium text-gray-900"
+        className="text-lg font-medium text-neutral-900"
       >
         Yorumlar
       </Heading>
@@ -19,7 +19,7 @@ function CommentList({ comments, status, error }) {
         <ErrorMessage message={error} className="mt-2" />
       )}
       {status === 'succeeded' && (!comments?.length ? (
-        <p className="mt-2 text-gray-500">Henüz yorum yok.</p>
+        <p className="mt-2 text-neutral-500">Henüz yorum yok.</p>
       ) : (
         <ul className="mt-2 space-y-3">
           {comments.map((c) => (

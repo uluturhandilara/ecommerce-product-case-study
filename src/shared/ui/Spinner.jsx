@@ -1,13 +1,13 @@
 function Spinner({ label = 'Yükleniyor', className = '' }) {
   return (
     <div
-      className={`flex items-center justify-center gap-2 py-8 text-gray-500 ${className}`.trim()}
+      className={`flex items-center justify-center gap-2 py-8 text-neutral-500 ${className}`.trim()}
       role="status"
       aria-live="polite"
       aria-label={label}
     >
       <svg
-        className="h-8 w-8 animate-spin text-gray-400"
+        className="h-8 w-8 animate-spin text-neutral-400"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 24 24"

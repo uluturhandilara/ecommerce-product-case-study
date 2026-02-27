@@ -53,7 +53,7 @@ function ProductDetailPage() {
             dispatch(fetchCommentsByPostId(Number(id)))
           }}
         />
-        <Link to="/" className="mt-4 inline-block text-gray-600 underline">
+        <Link to="/" className="mt-4 inline-block text-neutral-600 underline hover:text-neutral-900">
           Listeye dön
         </Link>
       </>
@@ -62,9 +62,9 @@ function ProductDetailPage() {
 
   if (!product) {
     return (
-      <p className="text-gray-600">
+      <p className="text-neutral-600">
         Ürün bulunamadı.{' '}
-        <Link to="/" className="underline">
+        <Link to="/" className="underline hover:text-neutral-900">
           Listeye dön
         </Link>
       </p>
@@ -74,17 +74,17 @@ function ProductDetailPage() {
   return (
     <article className="space-y-8">
       <nav aria-label="Breadcrumb" className="text-sm">
-        <ol className="flex items-center gap-2 text-gray-500">
+        <ol className="flex items-center gap-2 text-neutral-500">
           <li>
             <Link
               to="/"
-              className="text-emerald-700 hover:text-emerald-800 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+              className="text-neutral-600 hover:text-neutral-900 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2"
             >
               Anasayfa
             </Link>
           </li>
           <li aria-hidden="true">/</li>
-          <li className="font-medium text-gray-900">{product.name}</li>
+          <li className="font-medium text-neutral-900">{product.name}</li>
         </ol>
       </nav>
 
@@ -94,7 +94,7 @@ function ProductDetailPage() {
             <Image
               src={product.imageUrl}
               alt={product.name}
-              className="w-full rounded-xl shadow-md aspect-square object-cover"
+              className="w-full rounded-2xl aspect-square object-cover shadow-sm"
               width={600}
               height={600}
             />
@@ -105,7 +105,7 @@ function ProductDetailPage() {
                 <button
                   key={i}
                   type="button"
-                  className="h-16 w-16 shrink-0 overflow-hidden rounded-lg border-2 border-gray-200 bg-gray-50 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-offset-2"
+                  className="h-16 w-16 shrink-0 overflow-hidden rounded-xl border-2 border-neutral-200 bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-neutral-400 focus:ring-offset-2"
                   aria-label={`Ürün görseli ${i}`}
                 >
                   <Image
@@ -129,12 +129,12 @@ function ProductDetailPage() {
             </Button>
             <Link
               to="/"
-              className="inline-flex items-center justify-center rounded-lg border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 transition hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+              className="inline-flex items-center justify-center rounded-lg border border-neutral-300 bg-white px-4 py-2 text-sm font-medium text-neutral-700 transition hover:bg-neutral-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-400"
             >
               Listeye Dön
             </Link>
           </div>
-          <div className="mt-6 space-y-2 rounded-lg border border-gray-200 bg-gray-50 p-4 text-sm text-gray-600">
+          <div className="mt-6 space-y-2 rounded-xl border border-neutral-200 bg-neutral-50 p-4 text-sm text-neutral-600">
             <p className="flex items-center gap-2">
               <span aria-hidden="true">🚚</span>
               <span>Ücretsiz teslimat — Siparişler 2–4 iş günü içinde kargoya verilir.</span>

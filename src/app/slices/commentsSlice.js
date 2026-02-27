@@ -44,7 +44,7 @@ const commentsSlice = createSlice({
 
 export const selectCommentsByPostId = createSelector(
   [(state, postId) => state.comments.byPostId[postId], (_, postId) => postId],
-  (comments, postId) => comments ?? []
+  (comments) => comments ?? []
 )
 
 export const selectCommentsStatus = (state, postId) =>
