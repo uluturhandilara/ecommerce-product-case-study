@@ -1,16 +1,85 @@
-# React + Vite
+# E-ticaret Ürün Listeleme ve Detay Sayfası
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Bir e-ticaret platformunun ürün listeleme ve ürün detay sayfalarını içeren frontend case study projesi. Kullanıcılar ürünleri listeleyebilir, bir ürüne tıklayarak detay sayfasına gidebilir; detay sayfasında ürün bilgileri, görseller ve yorumlar gösterilir. Veri [JSONPlaceholder](https://jsonplaceholder.typicode.com) API’sinden alınır.
 
-Currently, two official plugins are available:
+## Özellikler
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **Ürün listesi:** Tüm ürünlerin isim, fiyat ve kısa açıklaması; bir ürüne tıklanınca detay sayfasına yönlendirme
+- **Ürün detayı:** Ürün adı, fiyat, açıklama, görsel(ler) ve kullanıcı yorumları
+- Loading ve hata durumları; hata sonrası yeniden deneme (retry)
+- Responsive arayüz, erişilebilirlik (aria, klavye odakları, anlamlı başlıklar) ve performans odaklı yapı (lazy loading, memoization)
 
-## React Compiler
+## Teknoloji ve Yapı
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- **React 19** + **Vite 7**
+- **React Router** (sayfa geçişleri)
+- **Redux Toolkit** (state yönetimi)
+- **Tailwind CSS** (stil ve responsive)
+- Modüler yapı: `app/` (store, router, slices), `features/` (ürün listesi, detay, yorumlar), `pages/`, `shared/` (API, UI bileşenleri)
 
-## Expanding the ESLint configuration
+### State yönetimi tercihi: Redux Toolkit
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- Ürün listesi ve detay sayfası aynı ürün verisini kullanıyor; merkezi state ile tek kaynak (single source of truth) sağlandı.
+- API istekleri, initial load ve error durumları async thunk’larla yönetiliyor; bileşenler sadece selector ve dispatch kullanıyor.
+- Yorumlar ayrı slice’ta tutuluyor; ileride filtreleme, sayfalama veya başka modüller eklenirse store genişletilebilir.
+
+## Gereksinimler
+
+- **Node.js** 18+
+- **npm** 9+
+
+## Projeyi çalıştırma (adım adım)
+
+1. **Projeyi klonlayın** (veya indirip açın):
+   ```bash
+   git clone <repo-url>
+   cd ecommerce-product-case-study
+   ```
+
+2. **Bağımlılıkları yükleyin:**
+   ```bash
+   npm install
+   ```
+
+3. **Geliştirme sunucusunu başlatın:**
+   ```bash
+   npm run dev
+   ```
+
+4. Tarayıcıda Vite’ın gösterdiği adrese gidin (`http://localhost:5173`). Ürün listesi ana sayfada açılır; bir ürüne tıklayarak detay sayfasına gidebilirsiniz.
+
+## Diğer komutlar
+
+- **Production build:**
+  ```bash
+  npm run build
+  ```
+- **Build’i yerel olarak önizleme:**
+  ```bash
+  npm run preview
+  ```
+- **Lint:**
+  ```bash
+  npm run lint
+  ```
+
+## API
+
+Veri [JSONPlaceholder](https://jsonplaceholder.typicode.com) kullanılarak alınır: `/posts` ürün listesi ve detay, `/posts/:id/comments` ilgili ürün yorumları için kullanılır. Görseller [Picsum Photos](https://picsum.photos) ile ürün id’sine göre üretilir.
+
+## Proje yapısı (özet)
+
+```
+src/
+├── app/           # Store, router, Redux slices
+├── features/      # product list, product detail, comments
+├── pages/         # ProductListPage, ProductDetailPage
+├── shared/        # API client, UI (Button, Card, Image, Spinner, ErrorMessage, vb.)
+├── App.jsx
+├── main.jsx
+└── index.css
+```
+
+---
+
+Bu proje, e-ticaret ürün listeleme ve detay sayfası frontend case study kapsamında geliştirilmiştir.
