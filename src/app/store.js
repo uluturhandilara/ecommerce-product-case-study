@@ -8,3 +8,12 @@ export const store = configureStore({
     comments: commentsReducer,
   },
 })
+
+export function createTestStore() {
+  return configureStore({
+    reducer: {
+      products: productsReducer,
+      comments: commentsReducer,
+    },
+  })
+}

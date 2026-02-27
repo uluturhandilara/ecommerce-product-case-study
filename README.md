@@ -63,11 +63,30 @@ Bir e-ticaret platformunun ürün listeleme ve ürün detay sayfalarını içere
   npm run lint
   ```
 
+## Testler
+
+Projede **Vitest** ve **React Testing Library** ile unit ve integration testler bulunur.
+
+- **Testleri çalıştırma (watch modunda):**
+  ```bash
+  npm test
+  ```
+- **Testleri tek seferde çalıştırma (CI için):**
+  ```bash
+  npm run test:run
+  ```
+
+### Test stratejisi
+
+- **Unit / component testleri:** `Spinner`, `ErrorMessage`, `ProductCard`, `ProductList` gibi bileşenlerin doğru render edilmesi, erişilebilirlik (role, label, alt) ve kullanıcı etkileşimleri (retry butonu) test edilir.
+- **Integration testleri:** `ProductListPage` ve `ProductDetailPage` sayfaları Redux store ve API mock’u ile birlikte test edilir; loading, başarılı veri yükleme, hata ve retry senaryoları kapsanır.
+- API çağrıları test ortamında `src/shared/api/products.js` modülü mock’lanarak gerçek ağ isteği yapılmaz.
+
 ## API
 
 Veri [JSONPlaceholder](https://jsonplaceholder.typicode.com) kullanılarak alınır: `/posts` ürün listesi ve detay, `/posts/:id/comments` ilgili ürün yorumları için kullanılır. Görseller [Picsum Photos](https://picsum.photos) ile ürün id’sine göre üretilir.
 
-## Proje yapısı (özet)
+## Proje yapısı
 
 ```
 src/
